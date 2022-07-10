@@ -1,6 +1,6 @@
 1. git clone https://github.com/knowde-academy/cookbook-BBE1.git cookbook
 2. cd cookbook
-3. rvm install "ruby-2.7.4
+3. rvm install ruby-2.7.4
 4. sudo yum install postgresql96*
 5. sudo service postgresql96 initdb
 6. service postgresql96 start

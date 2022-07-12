@@ -5,5 +5,6 @@ class RecipeSerializer < ActiveModel::Serializer
     return "unknown" unless object.price
     
     object.price
+    
   end
 end

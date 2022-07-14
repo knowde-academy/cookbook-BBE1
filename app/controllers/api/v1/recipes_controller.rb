@@ -7,7 +7,7 @@ module Api
       end
 
       def show
-        render json: RecipeSerializer.new(@recipe).to_h
+        render json: RecipeShowSerializer.new(@recipe).to_h
       end
 
       def create

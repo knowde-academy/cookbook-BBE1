@@ -14,7 +14,7 @@ describe Api::V1::RecipesController do
 
   describe '[GET] #show' do
     let!(:recipe) { create(:recipe) }
-    let(:expected_response) { RecipeSerializer.new(recipe).to_json }
+    let(:expected_response) { RecipeShowSerializer.new(recipe).to_json }
 
     before do
       get :show, params: { id: recipe.to_param }
@@ -30,7 +30,8 @@ describe Api::V1::RecipesController do
       {
         recipe: {
           name: 'Leczo',
-          content: 'Very good dish'
+          content: 'Very good dish',
+          video_link: 'https://www.google.pl/'
         }
       }
     end
@@ -46,7 +47,7 @@ describe Api::V1::RecipesController do
     context 'with invalid params' do
       it 'doesn\'t create recipe' do
         expect do
-          post :create, params: { recipe: { name: '', content: '' } }
+          post :create, params: { recipe: { name: '', content: '', video_link: nil } }
         end.not_to change(Recipe, :count)
       end
     end

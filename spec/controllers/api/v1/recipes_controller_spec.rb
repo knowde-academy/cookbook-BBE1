@@ -15,6 +15,7 @@ describe Api::V1::RecipesController do
   describe '[GET] #show' do
     let!(:recipe) { create(:recipe) }
     let(:expected_response) { RecipeSerializer.new(recipe).to_json }
+
     before do
       get :show, params: { id: recipe.to_param }
     end

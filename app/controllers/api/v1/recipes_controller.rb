@@ -7,7 +7,7 @@ module Api
       end
 
       def show
-        render json: RecipeSerializer.new(@recipe).to_h
+        render json: RecipeShowSerializer.new(@recipe).to_h
       end
 
       def create
@@ -21,7 +21,7 @@ module Api
 
       def update
         if @recipe.update(recipe_params)
-          render json: @recipe
+          render json: RecipeShowSerializer.new(@recipe).to_h
         else
           render json: { errors: @recipe.errors.to_s }, status: :unprocessable_entity
         end

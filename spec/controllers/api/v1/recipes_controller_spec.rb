@@ -14,7 +14,7 @@ describe Api::V1::RecipesController do
 
   describe '[GET] #show' do
     let!(:recipe) { create(:recipe) }
-    let(:expected_response) { RecipeSerializer.new(recipe).to_json }
+    let(:expected_response) { RecipeShowSerializer.new(recipe).to_json }
 
     before do
       get :show, params: { id: recipe.to_param }
@@ -30,7 +30,8 @@ describe Api::V1::RecipesController do
       {
         recipe: {
           name: 'Leczo',
-          content: 'Very good dish'
+          content: 'Very good dish',
+          cooking_time: 10
         }
       }
     end
@@ -46,7 +47,15 @@ describe Api::V1::RecipesController do
     context 'with invalid params' do
       it 'doesn\'t create recipe' do
         expect do
-          post :create, params: { recipe: { name: '', content: '' } }
+          post :create, params: { recipe: { name: '', content: '', cooking_time: 'invalid' } }
+        end.not_to change(Recipe, :count)
+      end
+    end
+
+    context 'with invalid cooking_time' do
+      it 'doesn\'t create recipe' do
+        expect do
+          post :create, params: { recipe: { name: 'testowe danie', content: 'testowy kontent', cooking_time: 'invalid' } }
         end.not_to change(Recipe, :count)
       end
     end
@@ -55,7 +64,9 @@ describe Api::V1::RecipesController do
   describe '[PUT] #update' do
     let(:old_name) { 'Rosol' }
     let(:new_name) { 'Pierogi' }
-    let(:recipe) { create(:recipe, name: old_name) }
+    let(:old_cooking_time) { 1 }
+    let(:new_cooking_time) { 1000 }
+    let(:recipe) { create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time) }
 
     context 'with valid params' do
       it 'updates name' do
@@ -70,6 +81,19 @@ describe Api::V1::RecipesController do
       end
     end
 
+    context 'with valid cooking_time' do
+      it 'updates cooking_time' do
+        expect do
+          put :update, params: { id: recipe.id, recipe: { cooking_time: new_cooking_time } }
+        end.to change { recipe.reload.cooking_time }.from(old_cooking_time).to(new_cooking_time)
+      end
+
+      it 'returns updated object' do
+        put :update, params: { id: recipe.id, recipe: { cooking_time: new_cooking_time } }
+        expect(JSON.parse(response.body)['cooking_time']).to eq(new_cooking_time)
+      end
+    end
+
     context 'with invalid params' do
       let(:invalid_new_name) { '' }
 
@@ -77,6 +101,16 @@ describe Api::V1::RecipesController do
         expect do
           put :update, params: { id: recipe.id, recipe: { name: invalid_new_name } }
         end.not_to change { recipe.reload.name }
+      end
+    end
+
+    context 'with invalid cooking_time' do
+      let(:invalid_cooking_time) { nil }
+
+      it 'doesn\'t update name' do
+        expect do
+          put :update, params: { id: recipe.id, recipe: { cooking_time: invalid_cooking_time } }
+        end.not_to change { recipe.reload.cooking_time }
       end
     end
   end

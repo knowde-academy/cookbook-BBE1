@@ -14,15 +14,9 @@ describe RecipeShowSerializer do
     end
 
     context 'with incorrect cooking_time' do
-      let!(:recipe) do
-        {
-          name: 'testowe danie',
-          content: 'testowy content',
-          cooking_time: nil
-        }
+      let!(:recipe) { build(:recipe, cooking_time: nil) }
 
-        it { is_expected.to include(cooking_time: recipe.cooking_time) }
-      end
+      it { is_expected.to include(cooking_time: 'unknown') }
     end
   end
 end

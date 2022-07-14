@@ -7,6 +7,4 @@ describe RecipeSerializer do
 
   it { is_expected.to include(name: recipe.name) }
   it { is_expected.to include(content: recipe.content) }
-  
-
 end

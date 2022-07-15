@@ -16,7 +16,7 @@ describe RecipeShowSerializer do
     context 'with incorrect cooking_time' do
       let!(:recipe) { build(:recipe, cooking_time: nil) }
 
-      it { is_expected.to include(cooking_time: 'unknown') }
+      it { is_expected.to include(cooking_time: described_class::UNKNOWN) }
     end
   end
 end

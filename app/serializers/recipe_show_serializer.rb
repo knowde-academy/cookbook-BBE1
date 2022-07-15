@@ -1,4 +1,5 @@
 class RecipeShowSerializer < RecipeSerializer
+  UNKNOWN = 'unknown'.freeze
   attributes :cooking_time
 
   def cooking_time

@@ -45,17 +45,37 @@ describe Api::V1::RecipesController do
     end
 
     context 'with invalid params' do
+      let(:recipe_params) do
+        {
+          recipe: {
+            name: '',
+            content: '',
+            cooking_time: nil
+          }
+        }
+      end
+
       it 'doesn\'t create recipe' do
         expect do
-          post :create, params: { recipe: { name: '', content: '', cooking_time: 'invalid' } }
+          post :create, params: recipe_params
         end.not_to change(Recipe, :count)
       end
     end
 
     context 'with invalid cooking_time' do
+      let(:recipe_params) do
+        {
+          recipe: {
+            name: 'testowe danie',
+            content: 'testowy kontent',
+            cooking_time: nil
+          }
+        }
+      end
+
       it 'doesn\'t create recipe' do
         expect do
-          post :create, params: { recipe: { name: 'testowe danie', content: 'testowy kontent', cooking_time: 'invalid' } }
+          post :create, params: recipe_params
         end.not_to change(Recipe, :count)
       end
     end

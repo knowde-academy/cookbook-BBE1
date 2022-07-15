@@ -2,7 +2,7 @@ class RecipeShowSerializer < RecipeSerializer
   attributes :price
 
   def price
-    return 'unknown' unless object.price
+    return UNKNOWN unless object.price
 
     object.price
   end

@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  has_many :comments, dependent: :destroy
+
   validates :price, numericality: { greater_than: 0 }
   validates :name, presence: true
   validates :video_link, url: { allow_blank: true }

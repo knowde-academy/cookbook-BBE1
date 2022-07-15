@@ -14,7 +14,8 @@ describe Api::V1::RecipesController do
 
   describe '[GET] #show' do
     let!(:recipe) { create(:recipe) }
-    let(:expected_response) { RecipeSerializer.new(recipe).to_json }
+    let(:expected_response) { RecipeShowSerializer.new(recipe).to_json }
+
     before do
       get :show, params: { id: recipe.to_param }
     end
@@ -29,7 +30,8 @@ describe Api::V1::RecipesController do
       {
         recipe: {
           name: 'Leczo',
-          content: 'Very good dish'
+          content: 'Very good dish',
+          price: 5
         }
       }
     end

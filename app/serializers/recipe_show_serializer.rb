@@ -1,4 +1,5 @@
 class RecipeShowSerializer < RecipeSerializer
+  UNKNOWN = 'unknown'.freeze
   attributes :video_link
 
   def video_link

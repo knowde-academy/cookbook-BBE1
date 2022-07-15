@@ -13,7 +13,7 @@ describe RecipeShowSerializer do
     context 'with empty video_link' do
       let!(:recipe) { build(:recipe, video_link: nil) }
 
-      it { is_expected.to include(video_link: 'unknown') }
+      it { is_expected.to include(video_link: described_class::UNKNOWN) }
     end
   end
 end

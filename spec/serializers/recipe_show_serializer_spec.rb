@@ -9,11 +9,11 @@ describe RecipeShowSerializer do
   it { is_expected.to include(content: recipe.content) }
 
   describe '#price' do
-    context 'with price ' do
+    context 'with price' do
       it { is_expected.to include(price: recipe.price) }
     end
 
-    context 'without price ' do
+    context 'without price' do
       let(:recipe) { build(:recipe, price: nil) }
 
       it { is_expected.to include(price: described_class::UNKNOWN) }

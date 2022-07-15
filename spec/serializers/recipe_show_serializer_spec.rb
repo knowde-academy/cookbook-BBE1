@@ -8,6 +8,18 @@ describe RecipeShowSerializer do
   it { is_expected.to include(name: recipe.name) }
   it { is_expected.to include(content: recipe.content) }
 
+  describe '#price' do
+    context 'with price' do
+      it { is_expected.to include(price: recipe.price) }
+    end
+
+    context 'without price' do
+      let(:recipe) { build(:recipe, price: nil) }
+
+      it { is_expected.to include(price: described_class::UNKNOWN) }
+    end
+  end
+      
   describe '#cooking_time' do
     context 'with correct cooking_time' do
       it { is_expected.to include(cooking_time: recipe.cooking_time) }

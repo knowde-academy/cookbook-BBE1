@@ -31,6 +31,7 @@ describe Api::V1::RecipesController do
         recipe: {
           name: 'Leczo',
           content: 'Very good dish',
+          price: 5
           cooking_time: 10
         }
       }
@@ -87,7 +88,7 @@ describe Api::V1::RecipesController do
     let(:old_cooking_time) { 1 }
     let(:new_cooking_time) { 1000 }
     let(:recipe) { create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time) }
-
+    let (:recipe_put_params) { create(:recipe, id: recipe.id, cooking_time: new_cooking_time ) } 
     context 'with valid params' do
       it 'updates name' do
         expect do
@@ -104,12 +105,12 @@ describe Api::V1::RecipesController do
     context 'with valid cooking_time' do
       it 'updates cooking_time' do
         expect do
-          put :update, params: { id: recipe.id, recipe: { cooking_time: new_cooking_time } }
+          put :update, params: recipe_put_params
         end.to change { recipe.reload.cooking_time }.from(old_cooking_time).to(new_cooking_time)
       end
 
       it 'returns updated object' do
-        put :update, params: { id: recipe.id, recipe: { cooking_time: new_cooking_time } }
+        put :update, params: recipe_put_params
         expect(JSON.parse(response.body)['cooking_time']).to eq(new_cooking_time)
       end
     end

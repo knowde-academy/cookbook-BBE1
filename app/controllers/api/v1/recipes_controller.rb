@@ -38,6 +38,7 @@ module Api
       private
 
       def recipe_params
+        params.require(:recipe).permit(%i[name content price])
         params.require(:recipe).permit(%i[name content cooking_time])
       end
 

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_07_12_101817) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "price"
+    t.decimal "price", precision: 7, scale: 2
   end
 
 end

@@ -31,7 +31,7 @@ describe Api::V1::RecipesController do
         recipe: {
           name: 'Leczo',
           content: 'Very good dish',
-          price: 5
+          price: 5,
           cooking_time: 10
         }
       }
@@ -51,7 +51,8 @@ describe Api::V1::RecipesController do
           recipe: {
             name: '',
             content: '',
-            cooking_time: nil
+            cooking_time: nil,
+            price: nil
           }
         }
       end
@@ -88,7 +89,7 @@ describe Api::V1::RecipesController do
     let(:old_cooking_time) { 1 }
     let(:new_cooking_time) { 1000 }
     let(:recipe) { create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time) }
-    let (:recipe_put_params) { create(:recipe, id: recipe.id, cooking_time: new_cooking_time ) } 
+    
     context 'with valid params' do
       it 'updates name' do
         expect do
@@ -103,6 +104,13 @@ describe Api::V1::RecipesController do
     end
 
     context 'with valid cooking_time' do
+      let (:recipe_put_params) do
+        { 
+          id: recipe.id, 
+          recipe: { cooking_time: new_cooking_time } 
+        }
+      end
+      
       it 'updates cooking_time' do
         expect do
           put :update, params: recipe_put_params
@@ -126,7 +134,7 @@ describe Api::V1::RecipesController do
     end
 
     context 'with invalid cooking_time' do
-      let(:invalid_cooking_time) { nil }
+      let(:invalid_cooking_time) { 'invalid' }
 
       it 'doesn\'t update name' do
         expect do

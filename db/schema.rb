@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2022_07_13_071422) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.decimal "price", precision: 7, scale: 2
+    t.integer "cooking_time"
   end
 
   add_foreign_key "comments", "recipes"

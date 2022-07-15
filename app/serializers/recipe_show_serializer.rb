@@ -1,7 +1,7 @@
 class RecipeShowSerializer < RecipeSerializer
   UNKNOWN = 'unknown'.freeze
 
-  attributes :price
+  attributes :price, :cooking_time
 
   has_many :comments
 
@@ -13,5 +13,11 @@ class RecipeShowSerializer < RecipeSerializer
     return UNKNOWN unless object.price
 
     object.price
+  end
+
+  def cooking_time
+    return UNKNOWN unless object.cooking_time
+
+    object.cooking_time
   end
 end

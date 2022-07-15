@@ -34,7 +34,6 @@ describe Api::V1::RecipesController do
           video_link: 'https://www.google.pl/',
           price: 5,
           cooking_time: 10
-
         }
       }
     end
@@ -53,8 +52,9 @@ describe Api::V1::RecipesController do
           recipe: {
             name: '',
             content: '',
-            cooking_time: nil,
-            price: nil
+            cooking_time: 'invalid',
+            price: 'invalid',
+            video_link: 'invalid'
           }
         }
       end

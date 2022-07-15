@@ -3,9 +3,9 @@ class CommentSerializer <ActiveModel::Serializer
   
   ANNONYMOUS = "annonymous"
   
-def author
-  return ANNONYMOUS if object.author.blank?
+  def author
+    return ANNONYMOUS if object.author.blank?
   
-  object.author
-end 
+    object.author
+  end 
 end

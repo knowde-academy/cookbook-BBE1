@@ -10,7 +10,7 @@ RSpec.describe Api::V1::CommentsController do
         {
           comment: {
             author: 'Adam Mickiewicz',
-            body: 'nininniimijijjijij'
+            body: 'niesamowiy przepis naprawde emejzing polecam'
           },
           recipe_id: recipe.id
         }

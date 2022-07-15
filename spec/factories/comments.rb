@@ -3,5 +3,5 @@ FactoryBot.define do
     author {Faker::Name.name}
     body {Faker::ChuckNorris.fact }
     recipe 
-end
+  end
 end

@@ -16,7 +16,7 @@ describe RecipeShowSerializer do
     context 'without price ' do
       let(:recipe) { build(:recipe, price: nil) }
 
-      it { is_expected.to include(price: UNKNOWN) }
+      it { is_expected.to include(price: described_class::UNKNOWN) }
     end
   end
 end

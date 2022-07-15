@@ -1,4 +1,5 @@
 class RecipeShowSerializer < RecipeSerializer
+  UNKNOWN = "unknown".freeze
   attributes :price
 
   def price

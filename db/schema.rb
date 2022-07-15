@@ -29,7 +29,11 @@ ActiveRecord::Schema.define(version: 2022_07_13_071422) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+<<<<<<< HEAD
     t.decimal "price"
+=======
+    t.decimal "price", precision: 7, scale: 2
+>>>>>>> origin/main
   end
 
   add_foreign_key "comments", "recipes"

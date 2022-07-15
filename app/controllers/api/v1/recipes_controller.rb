@@ -7,13 +7,13 @@ module Api
       end
 
       def show
-        render json: RecipeSerializer.new(@recipe).to_h
+        render json: RecipeShowSerializer.new(@recipe).to_h
       end
 
       def create
         @recipe = Recipe.new(recipe_params)
         if @recipe.save
-          render json: @recipe
+          render json: RecipeShowSerializer.new(@recipe).to_h
         else
           render json: { errors: @recipe.errors.to_s }, status: :unprocessable_entity
         end
@@ -21,7 +21,7 @@ module Api
 
       def update
         if @recipe.update(recipe_params)
-          render json: @recipe
+          render json: RecipeShowSerializer.new(@recipe).to_h
         else
           render json: { errors: @recipe.errors.to_s }, status: :unprocessable_entity
         end
@@ -29,7 +29,7 @@ module Api
 
       def destroy
         if @recipe.destroy
-          render json: @recipe
+          render json: RecipeShowSerializer.new(@recipe).to_h
         else
           render json: { errors: @recipe.errors.to_s }, status: :unprocessable_entity
         end
@@ -38,7 +38,7 @@ module Api
       private
 
       def recipe_params
-        params.require(:recipe).permit(%i[name content])
+        params.require(:recipe).permit(%i[name content price])
       end
 
       def set_recipe

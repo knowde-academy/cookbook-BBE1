@@ -31,7 +31,8 @@ describe Api::V1::RecipesController do
         recipe: {
           name: 'Leczo',
           content: 'Very good dish',
-          video_link: 'https://www.google.pl/'
+          video_link: 'https://www.google.pl/',
+          price: 5
         }
       }
     end
@@ -47,7 +48,7 @@ describe Api::V1::RecipesController do
     context 'with invalid params' do
       it 'doesn\'t create recipe' do
         expect do
-          post :create, params: { recipe: { name: '', content: '', video_link: nil } }
+          post :create, params: { recipe: { name: '', content: '', video_link: nil, prince: nil } }
         end.not_to change(Recipe, :count)
       end
     end

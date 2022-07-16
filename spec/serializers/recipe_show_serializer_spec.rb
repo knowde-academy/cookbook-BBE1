@@ -30,7 +30,8 @@ describe RecipeShowSerializer do
 
       it { is_expected.to include(video_link: described_class::UNKNOWN) }
     end
-  end 
+  end
+
   describe '#cooking_time' do
     context 'with correct cooking_time' do
       it { is_expected.to include(cooking_time: recipe.cooking_time) }

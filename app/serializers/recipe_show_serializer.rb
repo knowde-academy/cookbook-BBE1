@@ -2,13 +2,11 @@ class RecipeShowSerializer < RecipeSerializer
   UNKNOWN = 'unknown'.freeze
   attributes :video_link, :price, :cooking_time
 
-
   def video_link
     return UNKNOWN unless object.video_link
 
     object.video_link
   end
-
 
   has_many :comments
 

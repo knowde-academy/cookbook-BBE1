@@ -2,7 +2,6 @@ module Api
   module V1
     class RecipesController < ApplicationController
       before_action :set_recipe, except: %i[create index]
-      before_action :authenticate_user!, only: %i[show]
       def index
         render json: { data: ActiveModel::SerializableResource.new(Recipe.all, each_serializer: RecipeSerializer) }
       end

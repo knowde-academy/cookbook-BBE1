@@ -188,9 +188,9 @@ describe Api::V1::RecipesController do
     context 'with invalid video_link' do
       let(:invalid_video_link) { 'invalid' }
 
-      it 'doesn\'t update name' do
+      it 'doesn\'t update video_link' do
         expect do
-          put :update, params: { id: recipe.id, recipe: { cooking_time: invalid_video_link } }
+          put :update, params: { id: recipe.id, recipe: { video_link: invalid_video_link } }
         end.not_to change { recipe.reload.video_link }
       end
     end

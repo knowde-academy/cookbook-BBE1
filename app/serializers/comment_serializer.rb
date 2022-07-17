@@ -1,6 +1,6 @@
 class CommentSerializer < ActiveModel::Serializer
   ANNONYMOUS = 'annonymous'.freeze
-  
+
   attributes :id, :author, :body, :created_at
 
   def author

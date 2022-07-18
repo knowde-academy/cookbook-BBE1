@@ -67,9 +67,11 @@ describe Api::V1::ProductsController do
     let(:old_quantity) { 3 }
     let(:new_quantity) { 2 }
     let(:product) do
-    create(:product, name: old_name, quantity: old_quantity)
+      create(:product, name: old_name, quantity: old_quantity)
     end
-
+    
+    let (:product_put_params) { { id: product.id, product: { name: new_name, quantity: new_quantity } } }
+    
     context 'with valid params' do
       it 'updates name' do
         expect do
@@ -84,7 +86,7 @@ describe Api::V1::ProductsController do
       end
 
       it 'returns updated object' do
-        put :update, params: { id: product.id, product: { name: new_name, quantity: new_quantity } }
+        put :update, params: product_put_params
         expect(JSON.parse(response.body)['name']).to eq(new_name)
         expect(JSON.parse(response.body)['quantity']).to eq(new_quantity)
       end

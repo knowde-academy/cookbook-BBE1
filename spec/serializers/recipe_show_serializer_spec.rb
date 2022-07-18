@@ -31,6 +31,18 @@ describe RecipeShowSerializer do
     end
   end
 
+  describe '#video_link' do
+    context 'with filled video_link' do
+      it { is_expected.to include(video_link: recipe.video_link) }
+    end
+
+    context 'with empty video_link' do
+      let!(:recipe) { build(:recipe, video_link: nil) }
+
+      it { is_expected.to include(video_link: described_class::UNKNOWN) }
+    end
+  end
+
   describe '#cooking_time' do
     context 'with correct cooking_time' do
       it { is_expected.to include(cooking_time: recipe.cooking_time) }

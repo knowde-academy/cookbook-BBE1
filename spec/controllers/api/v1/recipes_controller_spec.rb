@@ -31,6 +31,7 @@ describe Api::V1::RecipesController do
         recipe: {
           name: 'Leczo',
           content: 'Very good dish',
+          video_link: 'https://www.google.pl/',
           price: 5,
           cooking_time: 10
         }
@@ -51,8 +52,9 @@ describe Api::V1::RecipesController do
           recipe: {
             name: '',
             content: '',
-            cooking_time: nil,
-            price: nil
+            cooking_time: 'invalid',
+            price: 'invalid',
+            video_link: 'invalid'
           }
         }
       end
@@ -70,9 +72,25 @@ describe Api::V1::RecipesController do
           recipe: {
             name: 'testowe danie',
             content: 'testowy kontent',
-            cooking_time: nil
+            cooking_time: 'invalid',
+            video_link: nil,
+            prince: nil
           }
         }
+      end
+
+      context 'with invalid video_link' do
+        let(:recipe_params) do
+          {
+            recipe: {
+              name: 'testowe danie',
+              content: 'testowy kontent',
+              cooking_time: 22,
+              video_link: 'invalid',
+              prince: 11
+            }
+          }
+        end
       end
 
       it 'doesn\'t create recipe' do
@@ -88,7 +106,11 @@ describe Api::V1::RecipesController do
     let(:new_name) { 'Pierogi' }
     let(:old_cooking_time) { 1 }
     let(:new_cooking_time) { 1000 }
-    let(:recipe) { create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time) }
+    let(:old_video_link) { 'https://www.google.pl/' }
+    let(:new_video_link) { 'https://guides.rubyonrails.org/index.html' }
+    let(:recipe) do
+      create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time, video_link: old_video_link)
+    end
 
     context 'with valid params' do
       it 'updates name' do
@@ -123,6 +145,26 @@ describe Api::V1::RecipesController do
       end
     end
 
+    context 'with valid video_link' do
+      let(:recipe_put_video_link) do
+        {
+          id: recipe.id,
+          recipe: { video_link: new_video_link }
+        }
+      end
+
+      it 'updates video_link' do
+        expect do
+          put :update, params: recipe_put_video_link
+        end.to change { recipe.reload.video_link }.from(old_video_link).to(new_video_link)
+      end
+
+      it 'returns updated object' do
+        put :update, params: recipe_put_video_link
+        expect(JSON.parse(response.body)['video_link']).to eq(new_video_link)
+      end
+    end
+
     context 'with invalid params' do
       let(:invalid_new_name) { '' }
 
@@ -140,6 +182,16 @@ describe Api::V1::RecipesController do
         expect do
           put :update, params: { id: recipe.id, recipe: { cooking_time: invalid_cooking_time } }
         end.not_to change { recipe.reload.cooking_time }
+      end
+    end
+
+    context 'with invalid video_link' do
+      let(:invalid_video_link) { 'invalid' }
+
+      it 'doesn\'t update video_link' do
+        expect do
+          put :update, params: { id: recipe.id, recipe: { video_link: invalid_video_link } }
+        end.not_to change { recipe.reload.video_link }
       end
     end
   end

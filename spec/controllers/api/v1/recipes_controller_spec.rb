@@ -89,7 +89,7 @@ describe Api::V1::RecipesController do
     let(:old_cooking_time) { 1 }
     let(:new_cooking_time) { 1000 }
     let(:recipe) { create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time) }
-    
+
     context 'with valid params' do
       it 'updates name' do
         expect do
@@ -104,13 +104,13 @@ describe Api::V1::RecipesController do
     end
 
     context 'with valid cooking_time' do
-      let (:recipe_put_params) do
-        { 
-          id: recipe.id, 
-          recipe: { cooking_time: new_cooking_time } 
+      let(:recipe_put_params) do
+        {
+          id: recipe.id,
+          recipe: { cooking_time: new_cooking_time }
         }
       end
-      
+
       it 'updates cooking_time' do
         expect do
           put :update, params: recipe_put_params

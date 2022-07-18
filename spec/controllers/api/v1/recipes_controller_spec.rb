@@ -33,7 +33,8 @@ describe Api::V1::RecipesController do
           content: 'Very good dish',
           video_link: 'https://www.google.pl/',
           price: 5,
-          cooking_time: 10
+          cooking_time: 10,
+          level: 4
         }
       }
     end
@@ -192,6 +193,16 @@ describe Api::V1::RecipesController do
         expect do
           put :update, params: { id: recipe.id, recipe: { video_link: invalid_video_link } }
         end.not_to change { recipe.reload.video_link }
+      end
+    end
+  
+    context 'with invalid level' do
+      let(:invalid_level) { 'invalid' }
+      
+      it 'doesn\'t update level' do
+        expect do 
+          put :update, params: { id: recipe.id, recipe: { level: invalid_level } }
+        end.not_to change { recipe.reload.level }
       end
     end
   end

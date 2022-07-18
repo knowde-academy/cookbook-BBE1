@@ -5,5 +5,5 @@ class Recipe < ApplicationRecord
   validates :name, presence: true
   validates :video_link, url: { allow_nil: true }
   validates :cooking_time, numericality: { only_integer: true, greater_than: 0 }
-  validates :level, integer: { :in => 1..5 }
+  validates :level, numericality: { only_integer: true, greater_than: 0, less_than: 6 }
 end

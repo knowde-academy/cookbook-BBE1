@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Api::V1::ProductsController do
   describe '[GET] #index' do
     before do
-      create_list(:product, 5)
+      create_list(:product, 2)
       get :index
     end
 
@@ -62,8 +62,8 @@ describe Api::V1::ProductsController do
     end
 
   describe '[PUT] #update' do
-    let(:old_name) { 'woda' }
-    let(:new_name) { 'sok' }
+    let(:old_name) { 'water' }
+    let(:new_name) { 'wine' }
     let(:old_quantity) { 3 }
     let(:new_quantity) { 2 }
     let(:product) do

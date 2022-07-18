@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
   has_many :comments, dependent: :destroy
-  has_many :ratings, dependent: :destroy #to dodałam
+  has_many :ratings, dependent: :destroy 
 
   validates :price, numericality: { greater_than: 0 }
   validates :name, presence: true

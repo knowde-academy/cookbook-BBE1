@@ -195,12 +195,12 @@ describe Api::V1::RecipesController do
         end.not_to change { recipe.reload.video_link }
       end
     end
-  
+
     context 'with invalid level' do
       let(:invalid_level) { 'invalid' }
-      
+
       it 'doesn\'t update level' do
-        expect do 
+        expect do
           put :update, params: { id: recipe.id, recipe: { level: invalid_level } }
         end.not_to change { recipe.reload.level }
       end

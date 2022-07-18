@@ -23,7 +23,7 @@ module Api
         if @recipe.update(recipe_params)
           render json: RecipeShowSerializer.new(@recipe).to_h
         else
-          render json: { errors: @recipe.errors.full_messages}, status: :unprocessable_entity
+          render json: { errors: @recipe.errors.full_messages }, status: :unprocessable_entity
         end
       end
 

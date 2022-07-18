@@ -54,16 +54,16 @@ describe RecipeShowSerializer do
       it { is_expected.to include(cooking_time: described_class::UNKNOWN) }
     end
   end
-  
+
   describe '#level' do
     context 'ith correct level' do
-     it { is_expected.to include(level: recipe.level) }
-   end
-   
+      it { is_expected.to include(level: recipe.level) }
+    end
+
     context 'with incorrect level' do
       let!(:recipe) { build(:recipe, level: nil) }
-      
+
       it { is_expected.to include(level: described_class::UNKNOWN) }
     end
-  end 
+  end
 end

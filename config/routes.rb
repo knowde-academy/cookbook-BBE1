@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :recipes do
         resources :comments, only: %i[create]
       end
+      resources :products
     end
   end
 end

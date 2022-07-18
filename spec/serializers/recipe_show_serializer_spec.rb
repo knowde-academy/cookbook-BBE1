@@ -8,6 +8,17 @@ describe RecipeShowSerializer do
   it { is_expected.to include(name: recipe.name) }
   it { is_expected.to include(content: recipe.content) }
 
+  describe '#comments' do
+    let!(:comments) { create_list :comment, 2, recipe: recipe }
+    let(:serialized_comments) do
+      comments.sort_by(&:created_at).reverse!.map do |comment|
+        CommentSerializer.new(comment).to_h
+      end
+    end
+
+    it { is_expected.to include(comments: serialized_comments) }
+  end
+
   describe '#price' do
     context 'with price' do
       it { is_expected.to include(price: recipe.price) }

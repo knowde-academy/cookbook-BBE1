@@ -109,8 +109,10 @@ describe Api::V1::RecipesController do
     let(:new_cooking_time) { 1000 }
     let(:old_video_link) { 'https://www.google.pl/' }
     let(:new_video_link) { 'https://guides.rubyonrails.org/index.html' }
+    let(:old_level) { 3 }
+    let(:new_level) { 1 }
     let(:recipe) do
-      create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time, video_link: old_video_link)
+      create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time, video_link: old_video_link, level: old_level)
     end
 
     context 'with valid params' do
@@ -165,7 +167,27 @@ describe Api::V1::RecipesController do
         expect(JSON.parse(response.body)['video_link']).to eq(new_video_link)
       end
     end
-
+    
+    context 'with valid level' do
+      let(:recipe_put_level) do
+        {
+          id: recipe.id,
+          recipe: { level: new_level }
+        }
+      end 
+      
+      it 'updated level' do
+        expect do
+          put :update, params: recipe_put_level
+        end.to change { recipe.reload.level }.from(old_level).to(new_level)
+      end
+      
+      it 'returns updated level' do
+        put :update, params: recipe_put_level
+        expect(JSON.parse(response.body)['level']).to eq(new_level)
+      end
+    end
+    
     context 'with invalid params' do
       let(:invalid_new_name) { '' }
 

@@ -25,4 +25,11 @@ class RecipeShowSerializer < RecipeSerializer
 
     object.cooking_time
   end
+  
+  def level
+    return UNKNOWN unless object.level
+
+    object.level
+  end
 end
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_14_113153) do
+ActiveRecord::Schema.define(version: 2022_07_18_180705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(version: 2022_07_14_113153) do
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
   end
 
+  create_table "ratings", force: :cascade do |t|
+    t.integer "rate"
+    t.bigint "recipe_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipe_id"], name: "index_ratings_on_recipe_id"
+  end
+
   create_table "recipes", force: :cascade do |t|
     t.string "name", null: false
     t.text "content"
@@ -35,4 +43,5 @@ ActiveRecord::Schema.define(version: 2022_07_14_113153) do
   end
 
   add_foreign_key "comments", "recipes"
+  add_foreign_key "ratings", "recipes"
 end

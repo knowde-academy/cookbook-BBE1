@@ -2,12 +2,17 @@ require 'rails_helper'
 
 RSpec.describe '#sign_in' do
   let(:user) { create(:user) }
+  let(:login_params) do
+    {
+      email: user.email,
+      password: user.password
+    }
+  end
+  let(:login_user) do
+      post '/api/v1/auth/sign_in', params: login_params
+  end
   
   context 'with valid params' do
-    let(:login_user) do
-      post '/api/v1/auth/sign_in', params: { email: user.email, password: user.password }
-    end
-  
     it 'request should be successful' do
       login_user
       expect(response).to have_http_status(:ok)
@@ -20,10 +25,9 @@ RSpec.describe '#sign_in' do
       expect(response.headers['access-token']).to be_present
     end
   end
+  
   context 'with invalid params' do
-    let(:login_user) do
-      post '/api/v1/auth/sign_in', params: { email: user.email, password: 'InvalidPassword' }
-    end
+    let!(:login_params) { { password: 'InvalidPassword' } }
     
     it 'request should be unauthorized' do
       login_user

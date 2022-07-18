@@ -26,6 +26,7 @@ RSpec.describe '#sign_up' do
         register
       end.not_to change(User, :count)
     end
+    
      it 'request should be successful' do
       register
       expect(response).to have_http_status(:unprocessable_entity)

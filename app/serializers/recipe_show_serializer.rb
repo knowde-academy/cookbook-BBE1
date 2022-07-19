@@ -1,7 +1,7 @@
 class RecipeShowSerializer < RecipeSerializer
   UNKNOWN = 'unknown'.freeze
   attributes :video_link, :price, :cooking_time
-  
+
   has_many :comments
   has_many :rates
 

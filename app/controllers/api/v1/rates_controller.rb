@@ -2,17 +2,17 @@ module Api
   module V1
     class RatesController < ApplicationController
       before_action :set_recipe
-      
-    def create
+
+      def create
         rating = Rate.new(ratings_params)
         rating.recipe = @recipe
- 
+
         if rating.save
           render json: rating
         else
           render json: { errors: rating.errors.full_messages }, status: :unprocessable_entity
         end
-    end
+      end
 
       private
 
@@ -26,4 +26,3 @@ module Api
     end
   end
 end
-      

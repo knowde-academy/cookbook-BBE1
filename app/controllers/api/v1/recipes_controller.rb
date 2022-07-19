@@ -15,7 +15,7 @@ module Api
         if @recipe.save
           render json: RecipeShowSerializer.new(@recipe).to_h
         else
-          render json: { errors: @recipe.errors.to_s }, status: :unprocessable_entity
+          render json: { errors: @recipe.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -23,7 +23,7 @@ module Api
         if @recipe.update(recipe_params)
           render json: RecipeShowSerializer.new(@recipe).to_h
         else
-          render json: { errors: @recipe.errors.to_s }, status: :unprocessable_entity
+          render json: { errors: @recipe.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
@@ -31,14 +31,14 @@ module Api
         if @recipe.destroy
           render json: RecipeShowSerializer.new(@recipe).to_h
         else
-          render json: { errors: @recipe.errors.to_s }, status: :unprocessable_entity
+          render json: { errors: @recipe.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       private
 
       def recipe_params
-        params.require(:recipe).permit(%i[name content price video_link cooking_time])
+        params.require(:recipe).permit(%i[name content price video_link cooking_time level])
       end
 
       def set_recipe

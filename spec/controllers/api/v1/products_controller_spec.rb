@@ -7,7 +7,7 @@ describe Api::V1::ProductsController do
       get :index
     end
 
-    it 'returns all recipes' do
+    it 'returns all products' do
       expect(JSON.parse(response.body)['data'].size).to eq(5)
     end
   end
@@ -36,7 +36,7 @@ describe Api::V1::ProductsController do
     end
 
     context 'with valid params' do
-      it 'creates recipe' do
+      it 'creates product' do
         expect do
           post :create, params: product_params
         end.to change(Product, :count).by(1)
@@ -53,7 +53,7 @@ describe Api::V1::ProductsController do
         }
       end
 
-      it 'doesn\'t create recipe' do
+      it 'doesn\'t create product' do
         expect do
           post :create, params: product_params
         end.not_to change(Product, :count)
@@ -116,7 +116,7 @@ describe Api::V1::ProductsController do
   describe '[DELETE] #destroy' do
     let!(:product) { create(:product) }
 
-    it 'destroys the recipe' do
+    it 'destroys product' do
       expect { delete :destroy, params: { id: product.id } }.to change(Product, :count).by(-1)
     end
 

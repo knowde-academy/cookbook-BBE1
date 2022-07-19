@@ -65,7 +65,9 @@ describe RecipeShowSerializer do
 
     context 'without rates' do
       it { is_expected.to include(avg_rate: 0) }
-
+    end
+ end
+ 
   describe '#level' do
     context 'ith correct level' do
       it { is_expected.to include(level: recipe.level) }

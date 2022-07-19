@@ -1,7 +1,7 @@
-class Rating < ApplicationRecord
+class Rate < ApplicationRecord
   belongs_to :recipe
 
-  validates :rate, allow_nil: true, numericality: {
+  validates :value, presence: true, numericality: {
     only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5
   }
 end

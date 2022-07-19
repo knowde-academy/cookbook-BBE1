@@ -3,7 +3,7 @@ class RecipeShowSerializer < RecipeSerializer
   attributes :video_link, :price, :cooking_time
   
   has_many :comments
-  has_many :ratings
+  has_many :rates
 
   def video_link
     return UNKNOWN unless object.video_link

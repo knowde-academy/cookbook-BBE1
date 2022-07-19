@@ -1,10 +1,10 @@
 module Api
   module V1
-    class RatingsController < ApplicationController
+    class RatesController < ApplicationController
       before_action :set_recipe
       
     def create
-        rating = Ratings.new(ratings_params)
+        rating = Rate.new(ratings_params)
         rating.recipe = @recipe
  
         if rating.save
@@ -17,7 +17,7 @@ module Api
       private
 
       def ratings_params
-        params.require(:rating).permit(:rate)
+        params.require(:rate).permit(:value)
       end
 
       def set_recipe

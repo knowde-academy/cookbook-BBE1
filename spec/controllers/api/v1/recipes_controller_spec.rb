@@ -109,7 +109,11 @@ describe Api::V1::RecipesController do
     let(:old_video_link) { 'https://www.google.pl/' }
     let(:new_video_link) { 'https://guides.rubyonrails.org/index.html' }
     let(:recipe) do
-      create(:recipe, name: old_name, content: 'asdas', cooking_time: old_cooking_time, video_link: old_video_link)
+      create(:recipe, 
+      name: old_name, 
+      content: 'asdas', 
+      cooking_time: old_cooking_time, 
+      video_link: old_video_link)
     end
 
     context 'with valid params' do

@@ -54,4 +54,16 @@ describe RecipeShowSerializer do
       it { is_expected.to include(cooking_time: described_class::UNKNOWN) }
     end
   end
+
+  describe 'rates' do
+    context 'with rates' do
+      let!(:rate) { create_list :rate, 2, recipe: recipe, value: 3 }
+
+      it { is_expected.to include(avg_rate: 3) }
+    end
+
+    context 'without rates' do
+      it { is_expected.to include(avg_rate: 0) }
+    end
+  end
 end

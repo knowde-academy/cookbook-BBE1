@@ -5,13 +5,15 @@ class RecipeShowSerializer < RecipeSerializer
   has_many :comments
 
   def avg_rate
+    return 0 if object.rates.blank?
+
     object.rates.average(:value)
   end
-   
+
   def rate_count
     object.rates.count
   end
-  
+
   def video_link
     return UNKNOWN unless object.video_link
 

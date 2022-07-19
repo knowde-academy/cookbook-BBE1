@@ -4,6 +4,7 @@ require 'validate_url/rspec_matcher'
 RSpec.describe Recipe, type: :model do
   describe 'associations' do
     it { is_expected.to have_many(:comments).dependent(:destroy) }
+    it { is_expected.to have_many(:rates).dependent(:destroy) }
   end
 
   describe 'validations' do

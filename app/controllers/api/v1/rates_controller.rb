@@ -4,19 +4,18 @@ module Api
       before_action :set_recipe
 
       def create
-        rating = Rate.new(ratings_params)
-        rating.recipe = @recipe
+        rate = @recipe.rates.new(rate_params)
 
-        if rating.save
-          render json: rating
+        if rate.save
+          render json: rate
         else
-          render json: { errors: rating.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: rate.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
       private
 
-      def ratings_params
+      def rate_params
         params.require(:rate).permit(:value)
       end
 

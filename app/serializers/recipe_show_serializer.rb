@@ -1,10 +1,17 @@
 class RecipeShowSerializer < RecipeSerializer
   UNKNOWN = 'unknown'.freeze
-  attributes :video_link, :price, :cooking_time
+  attributes :video_link, :price, :cooking_time, :avg_rate, :rate_count
 
   has_many :comments
-  has_many :rates
 
+  def avg_rate
+    object.rates.average(:value)
+  end
+   
+  def rate_count
+    object.rates.count
+  end
+  
   def video_link
     return UNKNOWN unless object.video_link
 

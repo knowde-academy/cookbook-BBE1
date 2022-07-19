@@ -8,7 +8,7 @@ describe Api::V1::ProductsController do
     end
 
     it 'returns all products' do
-      expect(JSON.parse(response.body)['data'].size).to eq(5)
+      expect(JSON.parse(response.body)['data'].size).to eq(2)
     end
   end
 

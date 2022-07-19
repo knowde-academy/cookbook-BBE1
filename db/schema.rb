@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 2022_07_19_094414) do
     t.index ["recipe_id"], name: "index_comments_on_recipe_id"
   end
 
+  create_table "products", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "quantity"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_products_on_name", unique: true
+  end
 
   create_table "rates", force: :cascade do |t|
     t.integer "value", null: false
@@ -31,14 +38,6 @@ ActiveRecord::Schema.define(version: 2022_07_19_094414) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recipe_id"], name: "index_rates_on_recipe_id"
-
-  create_table "products", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "quantity"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_products_on_name", unique: true
-
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -46,9 +45,8 @@ ActiveRecord::Schema.define(version: 2022_07_19_094414) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.decimal "price", precision: 7, scale: 2
     t.integer "cooking_time"
-    t.integer "level"
+    t.decimal "price", precision: 7, scale: 2
     t.string "video_link"
   end
 

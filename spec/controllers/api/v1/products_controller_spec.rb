@@ -8,7 +8,7 @@ describe Api::V1::ProductsController do
     end
 
     it 'returns all products' do
-      expect(JSON.parse(response.body)['data'].size).to eq(5)
+      expect(JSON.parse(response.body)['data'].size).to eq(2)
     end
   end
 
@@ -48,7 +48,7 @@ describe Api::V1::ProductsController do
         {
           product: {
             name: '',
-            quantity: "invalid"
+            quantity: 'invalid'
           }
         }
       end
@@ -59,7 +59,7 @@ describe Api::V1::ProductsController do
         end.not_to change(Product, :count)
       end
     end
-    end
+  end
 
   describe '[PUT] #update' do
     let(:old_name) { 'water' }
@@ -69,16 +69,16 @@ describe Api::V1::ProductsController do
     let(:product) do
       create(:product, name: old_name, quantity: old_quantity)
     end
-    
-    let (:product_put_params) { { id: product.id, product: { name: new_name, quantity: new_quantity } } }
-    
+
+    let(:product_put_params) { { id: product.id, product: { name: new_name, quantity: new_quantity } } }
+
     context 'with valid params' do
       it 'updates name' do
         expect do
           put :update, params: { id: product.id, product: { name: new_name } }
         end.to change { product.reload.name }.from(old_name).to(new_name)
       end
-      
+
       it 'updates quantity' do
         expect do
           put :update, params: { id: product.id, product: { quantity: new_quantity } }

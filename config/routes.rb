@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       mount_devise_token_auth_for 'User', at: 'auth'
       resources :recipes do
         resources :comments, only: %i[create]
+        resources :rates, only: %i[create]
       end
       resources :products
     end

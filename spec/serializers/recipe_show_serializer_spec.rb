@@ -56,7 +56,7 @@ describe RecipeShowSerializer do
   end
 
 
-  describe 'rates' do
+  describe '#avg_rate' do
     context 'with rates' do
       let!(:rate) { create_list :rate, 2, recipe: recipe, value: 3 }
 
@@ -67,6 +67,21 @@ describe RecipeShowSerializer do
       it { is_expected.to include(avg_rate: 0) }
     end
  end
+ 
+   describe '#rate_count' do
+    context 'with rates' do
+      let!(:rate) { create_list :rate, 2, recipe: recipe }
+
+      it { is_expected.to include(rate_count: 2) }
+    end
+
+    context 'without rates' do
+      it { is_expected.to include(rate_count: 0) }
+    end
+ end
+ 
+ 
+ 
  
   describe '#level' do
     context 'ith correct level' do

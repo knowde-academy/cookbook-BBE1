@@ -80,9 +80,6 @@ describe RecipeShowSerializer do
     end
  end
  
- 
- 
- 
   describe '#level' do
     context 'ith correct level' do
       it { is_expected.to include(level: recipe.level) }
